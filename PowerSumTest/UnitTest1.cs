@@ -8,7 +8,7 @@ public class ProgramTests
     [TestMethod]
     public void TestCountPowerSetsWithValidInput()
     {
-        int x = 16;
+        int x = 10;
         int n = 2;
         int expectedCount = 1;
         int actualCount = Program.powerSum(x, n);
@@ -24,6 +24,16 @@ public class ProgramTests
         int actualCount = Program.powerSum(x, n);
         Assert.AreEqual(expectedCount, actualCount);
     }
+
+    [TestMethod]
+    public void TestCountPowerSetsWithNoValidSubsets1()
+    {
+        int x = 1000;
+        int n = 4;
+        int expectedCount = 0;
+        int actualCount = Program.powerSum(x, n);
+        Assert.AreEqual(expectedCount, actualCount);
+    } 
 
     [TestMethod]
     public void TestCountPowerSetsWithMultipleSubsets()
@@ -43,15 +53,5 @@ public class ProgramTests
         int expectedCount = 1;
         int actualCount = Program.powerSum(x, n);
         Assert.AreEqual(expectedCount, actualCount);
-    }
-
-    [TestMethod]
-    public void TestCountPowerSetsWithLargeInput3()
-    {
-        int x = 1000;
-        int n = 4;
-        int expectedCount = 0;
-        int actualCount = Program.powerSum(x, n);
-        Assert.AreEqual(expectedCount, actualCount);
-    }    
+    }       
 }
