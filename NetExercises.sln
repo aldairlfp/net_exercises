@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindBugs", "FindBugs\FindBugs.csproj", "{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSum", "PowerSum\PowerSum.csproj", "{70435E4E-2AB5-4203-BD00-488796AE46B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70435E4E-2AB5-4203-BD00-488796AE46B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70435E4E-2AB5-4203-BD00-488796AE46B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70435E4E-2AB5-4203-BD00-488796AE46B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70435E4E-2AB5-4203-BD00-488796AE46B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
