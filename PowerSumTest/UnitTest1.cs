@@ -35,5 +35,23 @@ public class ProgramTests
         Assert.AreEqual(expectedCount, actualCount);
     }
 
-    // Add more test cases as needed...
+    [TestMethod]
+    public void TestCountPowerSetsWithLargeInput()
+    {
+        int x = 1000;
+        int n = 3;
+        int expectedCount = 1;
+        int actualCount = Program.powerSum(x, n);
+        Assert.AreEqual(expectedCount, actualCount);
+    }
+
+    [TestMethod]
+    public void TestCountPowerSetsWithLargeInput3()
+    {
+        int x = 1000;
+        int n = 4;
+        int expectedCount = 0;
+        int actualCount = Program.powerSum(x, n);
+        Assert.AreEqual(expectedCount, actualCount);
+    }    
 }
