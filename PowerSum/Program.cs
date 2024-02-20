@@ -25,10 +25,16 @@ public static class Program
     // checks if the sum of the set equals x
     static void GeneratePowerSet(int x, int[] powers, bool[] set, int index, int sum)
     {
+        // If the sum is greater than x then we can stop generating the set 
+        // since the powers array is sorted in ascending order and the sum 
+        // will only increase from this point on
         if (sum > x)
         {
             return;
         }
+        // If the index is equal to the length of the set array then we have
+        // generated a complete set and we can check if the sum of the set
+        // equals x
         if (index == set.Length)
         {
             if (sum == x)
