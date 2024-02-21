@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ContactManagerAPI.Validators;
 
 namespace ContactManagerAPI.Models;
 
@@ -15,11 +16,12 @@ public class Contact
 
     [Required]
     [StringLength(128)]
-    [EmailAddress]
+    [EmailValidation]
     public string? Email {get; set;}
 
     [Required]
     [DataType(DataType.Date)]
+    [AgeValidator]
     public DateTime? DateOfBirth {get; set;}
 
     [Required]
