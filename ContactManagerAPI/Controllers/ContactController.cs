@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ContactManagerAPI;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/contacts")]
 public class Contact : Controller
 {
     private readonly ContactAPIDbContext _context;
@@ -33,8 +33,8 @@ public class Contact : Controller
             c.User,
             Age = c.DateOfBirth > DateTime.Today.AddYears(
                 c.DateOfBirth.Value.Year - DateTime.Today.Year
-                    ) ? DateTime.Today.Year - c.DateOfBirth.Value.Year - 1:
-                        DateTime.Today.Year - c.DateOfBirth.Value.Year 
+                    ) ? DateTime.Today.Year - c.DateOfBirth.Value.Year - 1 :
+                        DateTime.Today.Year - c.DateOfBirth.Value.Year
         }));
     }
 
@@ -43,27 +43,35 @@ public class Contact : Controller
     public async Task<IActionResult> GetContact([FromRoute] Guid id)
     {
         var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
-        var contact = contacts.Single(c => c.Id == id);
 
-        if (contact == null)
+        try
+        {
+            var contact = contacts.Single(c => c.Id == id);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new
+            {
+                contact.Id,
+                contact.Firstname,
+                contact.LastName,
+                contact.Email,
+                contact.DateOfBirth,
+                contact.Phone,
+                contact.User,
+                Age = contact.DateOfBirth > DateTime.Today.AddYears(
+                    contact.DateOfBirth.Value.Year - DateTime.Today.Year
+                        ) ? DateTime.Today.Year - contact.DateOfBirth.Value.Year - 1 :
+                            DateTime.Today.Year - contact.DateOfBirth.Value.Year
+            });
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        return Ok(new
-        {
-            contact.Id,
-            contact.Firstname,
-            contact.LastName,
-            contact.Email,
-            contact.DateOfBirth,
-            contact.Phone,
-            contact.User,
-            Age = contact.DateOfBirth > DateTime.Today.AddYears(
-                contact.DateOfBirth.Value.Year - DateTime.Today.Year
-                    ) ? DateTime.Today.Year - contact.DateOfBirth.Value.Year - 1:
-                        DateTime.Today.Year - contact.DateOfBirth.Value.Year
-        });
     }
 
     [HttpPost]
