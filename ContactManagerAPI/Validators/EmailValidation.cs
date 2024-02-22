@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using ContactManagerAPI.Data;
 
 namespace ContactManagerAPI.Validators;
@@ -13,10 +14,17 @@ public class EmailValidationAttribute : ValidationAttribute
             return new ValidationResult("Email already exists");
 
         }
-        if(new EmailAddressAttribute().IsValid(value))
+        if(IsValid((string)value))
         {
-            return new ValidationResult("Invalid Email");
+            return ValidationResult.Success;
         }
-        return ValidationResult.Success;
+        return new ValidationResult("Invalid Email");
     }
-}
+
+    private static bool IsValid(string email)
+        { 
+            string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
+
+            return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
+        }
+   }
