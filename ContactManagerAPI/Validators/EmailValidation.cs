@@ -14,17 +14,10 @@ public class EmailValidationAttribute : ValidationAttribute
             return new ValidationResult("Email already exists");
 
         }
-        if(IsValid((string)value))
+        if (new EmailAddressAttribute().IsValid((string)value))
         {
             return ValidationResult.Success;
         }
         return new ValidationResult("Invalid Email");
     }
-
-    private static bool IsValid(string email)
-        { 
-            string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
-
-            return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
-        }
-   }
+}
