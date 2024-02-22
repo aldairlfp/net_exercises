@@ -20,7 +20,8 @@ public class Contact : Controller
     [HttpGet]
     public async Task<IActionResult> GetContacts()
     {
-        var contacts = await _context.Contacts.ToListAsync();
+        var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
+
         return Ok(contacts.Select(c => new
         {
             c.Id,
@@ -30,14 +31,19 @@ public class Contact : Controller
             c.DateOfBirth,
             c.Phone,
             c.User,
-            Age = DateTime.Now.Year - c.DateOfBirth.Value.Year
+            Age = c.DateOfBirth > DateTime.Today.AddYears(
+                c.DateOfBirth.Value.Year - DateTime.Today.Year
+                    ) ? DateTime.Today.Year - c.DateOfBirth.Value.Year - 1:
+                        DateTime.Today.Year - c.DateOfBirth.Value.Year 
         }));
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet]
+    [Route("{id:guid}")]
     public async Task<IActionResult> GetContact([FromRoute] Guid id)
     {
-        var contact = await _context.Contacts.FindAsync(id);
+        var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
+        var contact = contacts.Single(c => c.Id == id);
 
         if (contact == null)
         {
@@ -53,7 +59,10 @@ public class Contact : Controller
             contact.DateOfBirth,
             contact.Phone,
             contact.User,
-            Age = DateTime.Now.Year - contact.DateOfBirth.Value.Year
+            Age = contact.DateOfBirth > DateTime.Today.AddYears(
+                contact.DateOfBirth.Value.Year - DateTime.Today.Year
+                    ) ? DateTime.Today.Year - contact.DateOfBirth.Value.Year - 1:
+                        DateTime.Today.Year - contact.DateOfBirth.Value.Year
         });
     }
 
@@ -75,13 +84,19 @@ public class Contact : Controller
             User = await _context.Users.FindAsync(contact.User)
         };
 
+        if (newContact.User == null)
+        {
+            return BadRequest(contact.User);
+        }
+
         _context.Contacts.Add(newContact);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetContact), new { id = newContact.Id }, newContact);
     }
 
-    [HttpPut("{id:guid}")]
+    [HttpPut]
+    [Route("{id:guid}")]
     public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] ContactRequest contact)
     {
         if (!ModelState.IsValid)
@@ -108,7 +123,8 @@ public class Contact : Controller
         return NoContent();
     }
 
-    [HttpDelete("{id:guid}")]
+    [HttpDelete]
+    [Route("{id:guid}")]
     public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
     {
         var contact = await _context.Contacts.FindAsync(id);
