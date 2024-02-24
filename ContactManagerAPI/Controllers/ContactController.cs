@@ -1,5 +1,7 @@
 using ContactManagerAPI.Data;
+using ContactManagerAPI.Identity;
 using ContactManagerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,8 @@ namespace ContactManagerAPI;
 
 [ApiController]
 [Route("api/contacts")]
+[Authorize]
+[UsernameClaim]
 public class Contact : Controller
 {
     private readonly ContactAPIDbContext _context;
@@ -133,6 +137,7 @@ public class Contact : Controller
 
     [HttpDelete]
     [Route("{id:guid}")]
+    [CubanAdministrator]
     public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
     {
         var contact = await _context.Contacts.FindAsync(id);
