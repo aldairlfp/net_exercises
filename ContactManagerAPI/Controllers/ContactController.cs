@@ -26,7 +26,7 @@ public class ContactController : Controller
     {
         var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
 
-        return Ok(contacts.Select(c => new
+        return base.Ok(contacts.Select(c => new
         {
             c.Id,
             c.Firstname,
@@ -35,10 +35,7 @@ public class ContactController : Controller
             c.DateOfBirth,
             c.Phone,
             c.User,
-            Age = c.DateOfBirth > DateTime.Today.AddYears(
-                c.DateOfBirth.Value.Year - DateTime.Today.Year
-                    ) ? DateTime.Today.Year - c.DateOfBirth.Value.Year - 1 :
-                        DateTime.Today.Year - c.DateOfBirth.Value.Year
+            Age = GetAgeFromDate(c)
         }));
     }
 
@@ -66,10 +63,7 @@ public class ContactController : Controller
                 contact.DateOfBirth,
                 contact.Phone,
                 contact.User,
-                Age = contact.DateOfBirth > DateTime.Today.AddYears(
-                    contact.DateOfBirth.Value.Year - DateTime.Today.Year
-                        ) ? DateTime.Today.Year - contact.DateOfBirth.Value.Year - 1 :
-                            DateTime.Today.Year - contact.DateOfBirth.Value.Year
+                Age = GetAgeFromDate(contact) 
             });
         }
         catch (InvalidOperationException)
@@ -98,7 +92,7 @@ public class ContactController : Controller
 
         if (newContact.User == null)
         {
-            return BadRequest(contact.User);
+            return BadRequest("The user does not exist");
         }
 
         _context.Contacts.Add(newContact);
@@ -151,5 +145,13 @@ public class ContactController : Controller
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    private static int GetAgeFromDate(Contact c)
+    {
+        return c.DateOfBirth > DateTime.Today.AddYears(
+                        c.DateOfBirth.Value.Year - DateTime.Today.Year
+                            ) ? DateTime.Today.Year - c.DateOfBirth.Value.Year - 1 :
+                                DateTime.Today.Year - c.DateOfBirth.Value.Year;
     }
 }
