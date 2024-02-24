@@ -11,12 +11,12 @@ namespace ContactManagerAPI;
 [Route("api/contacts")]
 [Authorize]
 [UsernameClaim]
-public class Contact : Controller
+public class ContactController : Controller
 {
     private readonly ContactAPIDbContext _context;
 
 
-    public Contact(ContactAPIDbContext context)
+    public ContactController(ContactAPIDbContext context)
     {
         _context = context;
     }
