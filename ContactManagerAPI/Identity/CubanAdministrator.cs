@@ -10,9 +10,8 @@ namespace ContactManagerAPI.Identity
         {
             var claims = context.HttpContext.User.Claims;
             var country = claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/country")?.Value;
-            //var isAdmin = claims.Any(c => c.Type == "Role" && c.Value == "Administrator");
-            var isAdmin = context.HttpContext.User.IsInRole("Administrator");
-            if (country != "CU" && isAdmin)
+            var isAdmin = claims.Any(c => c.Type == "Role" && c.Value == "Administrator");
+            if (country != "CU" || !isAdmin)
                 context.Result = new ForbidResult();
         }
     }
