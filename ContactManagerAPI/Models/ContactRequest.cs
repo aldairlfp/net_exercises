@@ -27,5 +27,5 @@ public class ContactRequest
     public string? Phone {get; set;}
 
     [Required]
-    public virtual Guid User {get; set;}
+    public virtual Guid Owner {get; set;}
 }

@@ -24,7 +24,7 @@ public class ContactController : Controller
     [HttpGet]
     public async Task<IActionResult> GetContacts()
     {
-        var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
+        var contacts = await _context.Contacts.ToListAsync();
 
         return base.Ok(contacts.Select(c => new
         {
@@ -34,7 +34,7 @@ public class ContactController : Controller
             c.Email,
             c.DateOfBirth,
             c.Phone,
-            c.User,
+            c.Owner,
             Age = GetAgeFromDate(c)
         }));
     }
@@ -43,7 +43,7 @@ public class ContactController : Controller
     [Route("{id:guid}")]
     public async Task<IActionResult> GetContact([FromRoute] Guid id)
     {
-        var contacts = await _context.Contacts.Include(c => c.User).ToListAsync();
+        var contacts = await _context.Contacts.ToListAsync();
 
         try
         {
@@ -62,7 +62,7 @@ public class ContactController : Controller
                 contact.Email,
                 contact.DateOfBirth,
                 contact.Phone,
-                contact.User,
+                contact.Owner,
                 Age = GetAgeFromDate(contact) 
             });
         }
@@ -87,13 +87,8 @@ public class ContactController : Controller
             Email = contact.Email,
             DateOfBirth = contact.DateOfBirth,
             Phone = contact.Phone,
-            User = await _context.Users.FindAsync(contact.User)
+            Owner = contact.Owner
         };
-
-        if (newContact.User == null)
-        {
-            return BadRequest("The user does not exist");
-        }
 
         _context.Contacts.Add(newContact);
         await _context.SaveChangesAsync();
@@ -122,7 +117,7 @@ public class ContactController : Controller
         existingContact.Email = contact.Email;
         existingContact.DateOfBirth = contact.DateOfBirth;
         existingContact.Phone = contact.Phone;
-        existingContact.User = await _context.Users.FindAsync(contact.User);
+        existingContact.Owner = contact.Owner;
 
         await _context.SaveChangesAsync();
 
