@@ -2,6 +2,7 @@ using ContactManagerAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace ContactManagerAPI.Identity;
 
@@ -14,7 +15,7 @@ public class UsernameClaimAttribute: Attribute, IAsyncAuthorizationFilter
             .RequestServices
             .GetService(typeof(ContactAPIDbContext)) as ContactAPIDbContext;
         var user = context.HttpContext.User;
-        var username = user.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        var username = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         var userExists = await dbContext.Users.AnyAsync(u => u.Username == username);
 
         if (!userExists)
