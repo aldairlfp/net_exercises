@@ -1,7 +1,11 @@
+using System.Text;
 using ContactManagerAPI.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 builder.Services.AddControllers();
 
@@ -10,9 +14,26 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<ContactAPIDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ContactAPIConnectionString")));
+    options.UseSqlServer(config["ConnectionStrings:ContactAPIConnectionString"]));
+
+builder.Services.AddAuthentication(x => {
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>{
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = config["JWT:Issuer"],
+        ValidAudience = config["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(config["JWT:Key"]!)),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true    
+    };
+});
 
 var app = builder.Build();
 
@@ -24,6 +45,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
