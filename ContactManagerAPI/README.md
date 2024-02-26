@@ -21,4 +21,4 @@ The body of the request for POST and PUT should be in JSON format and should con
 }
 ```
 
-The date of birth should be in the format "yyyy-MM-dd". The lasname is optional. For delete contact, the user must be administrator and must be cuban. It use JWT bearer token as authorization, so you must include the token in the header of the request.
+The date of birth should be in the format "yyyy-MM-dd". The lasname is optional and the email should not be repeated. For delete contact, the user must be administrator and must be cuban. It use JWT bearer token as authorization, so you must include the token in the header of the request. It also use two environment variables for the connection string and the secret key for the JWT token. The connection string is called `ConnectionStrings:ContactAPIConnectionString` and the secret key is called `Jwt:Key`. The connection string is used to connect to the database and the secret key is used to sign the JWT token. The database is created using Entity Framework Core and it is a simple database with only one table called `Contacts` and `Users`.
