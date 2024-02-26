@@ -3,19 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindBugs", "FindBugs\FindBugs.csproj", "{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindBugs", "FindBugs\FindBugs.csproj", "{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSum", "PowerSum\PowerSum.csproj", "{70435E4E-2AB5-4203-BD00-488796AE46B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerSum", "PowerSum\PowerSum.csproj", "{70435E4E-2AB5-4203-BD00-488796AE46B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSumTest", "PowerSumTest\PowerSumTest.csproj", "{0F358945-9DEF-48BE-B838-FF16807B6CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerSumTest", "PowerSumTest\PowerSumTest.csproj", "{0F358945-9DEF-48BE-B838-FF16807B6CB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagerAPI", "ContactManagerAPI\ContactManagerAPI.csproj", "{A2491CD5-FB1C-4526-86B5-C52354580AA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagerAPI.Tests", "ContactManagerAPI.Tests\ContactManagerAPI.Tests.csproj", "{B79CE780-8E4F-4D2F-A9ED-0681BA51E7B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AB9BCF71-1A3C-4F97-8D96-1727A011BBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +31,19 @@ Global
 		{0F358945-9DEF-48BE-B838-FF16807B6CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F358945-9DEF-48BE-B838-FF16807B6CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F358945-9DEF-48BE-B838-FF16807B6CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2491CD5-FB1C-4526-86B5-C52354580AA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2491CD5-FB1C-4526-86B5-C52354580AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2491CD5-FB1C-4526-86B5-C52354580AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2491CD5-FB1C-4526-86B5-C52354580AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79CE780-8E4F-4D2F-A9ED-0681BA51E7B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79CE780-8E4F-4D2F-A9ED-0681BA51E7B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79CE780-8E4F-4D2F-A9ED-0681BA51E7B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79CE780-8E4F-4D2F-A9ED-0681BA51E7B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8548CB9-B98C-4774-9E22-E537A455C6FF}
 	EndGlobalSection
 EndGlobal
