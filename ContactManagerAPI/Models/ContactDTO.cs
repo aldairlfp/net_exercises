@@ -3,8 +3,10 @@ using ContactManagerAPI.Validators;
 
 namespace ContactManagerAPI.Models;
 
-public class ContactRequest
+public class ContactDTO
 {
+    public Guid Id { get; set;}
+
     [Required]
     [StringLength(128)]
     public string? Firstname {get; set;}
@@ -21,6 +23,8 @@ public class ContactRequest
     [DataType(DataType.Date)]
     [AgeValidator]
     public DateTime? DateOfBirth {get; set;}
+
+    public int Age { get; set;}
 
     [Required]
     [StringLength(20)]

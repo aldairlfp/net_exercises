@@ -26,16 +26,16 @@ public class ContactController : Controller
     {
         var contacts = await _context.Contacts.ToListAsync();
 
-        return base.Ok(contacts.Select(c => new
+        return base.Ok(contacts.Select(contact => new ContactDTO
         {
-            c.Id,
-            c.Firstname,
-            c.LastName,
-            c.Email,
-            c.DateOfBirth,
-            c.Phone,
-            c.Owner,
-            Age = GetAgeFromDate(c)
+            Id = contact.Id,
+            Firstname = contact.Firstname,
+            LastName = contact.LastName,
+            Email = contact.Email,
+            DateOfBirth = contact.DateOfBirth,
+            Phone = contact.Phone,
+            Owner = contact.Owner,
+            Age = GetAgeFromDate(contact)
         }));
     }
 
@@ -54,16 +54,16 @@ public class ContactController : Controller
                 return NotFound();
             }
 
-            return Ok(new
+            return Ok(new ContactDTO
             {
-                contact.Id,
-                contact.Firstname,
-                contact.LastName,
-                contact.Email,
-                contact.DateOfBirth,
-                contact.Phone,
-                contact.Owner,
-                Age = GetAgeFromDate(contact) 
+                Id = contact.Id,
+                Firstname = contact.Firstname,
+                LastName = contact.LastName,
+                Email = contact.Email,
+                DateOfBirth = contact.DateOfBirth,
+                Phone = contact.Phone,
+                Owner = contact.Owner,
+                Age = GetAgeFromDate(contact)
             });
         }
         catch (InvalidOperationException)
@@ -73,7 +73,7 @@ public class ContactController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateContact([FromBody] ContactRequest contact)
+    public async Task<IActionResult> CreateContact([FromBody] ContactDTO contactDTO)
     {
         if (!ModelState.IsValid)
         {
@@ -82,15 +82,15 @@ public class ContactController : Controller
 
         var newContact = new Models.Contact
         {
-            Firstname = contact.Firstname,
-            LastName = contact.LastName,
-            Email = contact.Email,
-            DateOfBirth = contact.DateOfBirth,
-            Phone = contact.Phone,
-            Owner = contact.Owner
+            Firstname = contactDTO.Firstname,
+            LastName = contactDTO.LastName,
+            Email = contactDTO.Email,
+            DateOfBirth = contactDTO.DateOfBirth,
+            Phone = contactDTO.Phone,
+            Owner = contactDTO.Owner
         };
 
-        _context.Contacts.Add(newContact);
+        _context.Contacts.AddAsync(newContact);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetContact), new { id = newContact.Id }, newContact);
@@ -98,7 +98,7 @@ public class ContactController : Controller
 
     [HttpPut]
     [Route("{id:guid}")]
-    public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] ContactRequest contact)
+    public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] ContactDTO contactDTO)
     {
         if (!ModelState.IsValid)
         {
@@ -112,12 +112,12 @@ public class ContactController : Controller
             return NotFound();
         }
 
-        existingContact.Firstname = contact.Firstname;
-        existingContact.LastName = contact.LastName;
-        existingContact.Email = contact.Email;
-        existingContact.DateOfBirth = contact.DateOfBirth;
-        existingContact.Phone = contact.Phone;
-        existingContact.Owner = contact.Owner;
+        existingContact.Firstname = contactDTO.Firstname;
+        existingContact.LastName = contactDTO.LastName;
+        existingContact.Email = contactDTO.Email;
+        existingContact.DateOfBirth = contactDTO.DateOfBirth;
+        existingContact.Phone = contactDTO.Phone;
+        existingContact.Owner = contactDTO.Owner;
 
         await _context.SaveChangesAsync();
 
