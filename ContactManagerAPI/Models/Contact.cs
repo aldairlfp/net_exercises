@@ -12,7 +12,7 @@ public class Contact
     public string? Firstname {get; set;}
 
     [StringLength(128)]
-    public string? LastName {get; set;}
+    public string? Lastname {get; set;}
 
     [Required]
     [StringLength(128)]

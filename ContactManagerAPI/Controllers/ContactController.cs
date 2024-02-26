@@ -30,7 +30,7 @@ public class ContactController : Controller
         {
             Id = contact.Id,
             Firstname = contact.Firstname,
-            LastName = contact.LastName,
+            LastName = contact.Lastname,
             Email = contact.Email,
             DateOfBirth = contact.DateOfBirth,
             Phone = contact.Phone,
@@ -58,7 +58,7 @@ public class ContactController : Controller
             {
                 Id = contact.Id,
                 Firstname = contact.Firstname,
-                LastName = contact.LastName,
+                LastName = contact.Lastname,
                 Email = contact.Email,
                 DateOfBirth = contact.DateOfBirth,
                 Phone = contact.Phone,
@@ -83,7 +83,7 @@ public class ContactController : Controller
         var newContact = new Models.Contact
         {
             Firstname = contactDTO.Firstname,
-            LastName = contactDTO.LastName,
+            Lastname = contactDTO.LastName,
             Email = contactDTO.Email,
             DateOfBirth = contactDTO.DateOfBirth,
             Phone = contactDTO.Phone,
@@ -113,7 +113,7 @@ public class ContactController : Controller
         }
 
         existingContact.Firstname = contactDTO.Firstname;
-        existingContact.LastName = contactDTO.LastName;
+        existingContact.Lastname = contactDTO.LastName;
         existingContact.Email = contactDTO.Email;
         existingContact.DateOfBirth = contactDTO.DateOfBirth;
         existingContact.Phone = contactDTO.Phone;

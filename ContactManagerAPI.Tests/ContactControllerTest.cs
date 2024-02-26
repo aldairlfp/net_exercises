@@ -54,7 +54,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test",
-                LastName = "Test",
+                Lastname = "Test",
                 Email = "Test@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-18),
                 Phone = "Testphone",
@@ -64,7 +64,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test2",
-                LastName = "Test2",
+                Lastname = "Test2",
                 Email = "test2@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-18),
                 Phone = "Testphone2",
@@ -91,7 +91,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test",
-                LastName = "Test",
+                Lastname = "Test",
                 Email = "test@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-18),
                 Phone = "Testphone",
@@ -101,7 +101,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test2",
-                LastName = "Test2",
+                Lastname = "Test2",
                 Email = "test2@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-18),
                 Phone = "Testphone2",
@@ -133,7 +133,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test",
-                LastName = "Test",
+                Lastname = "Test",
                 Email = "test@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone",
@@ -143,7 +143,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test2",
-                LastName = "Test2",
+                Lastname = "Test2",
                 Email = "test2@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone2",
@@ -184,7 +184,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test",
-                LastName = "Test",
+                Lastname = "Test",
                 Email = "test@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone",
@@ -194,7 +194,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test2",
-                LastName = "Test2",
+                Lastname = "Test2",
                 Email = "test2@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone2",
@@ -230,7 +230,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test",
-                LastName = "Test",
+                Lastname = "Test",
                 Email = "test@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone",
@@ -240,7 +240,7 @@ public class ContactControllerTest
             {
                 Id = Guid.NewGuid(),
                 Firstname = "Test2",
-                LastName = "Test2",
+                Lastname = "Test2",
                 Email = "test2@gmail.com",
                 DateOfBirth = DateTime.Now.AddYears(-19),
                 Phone = "Testphone2",
